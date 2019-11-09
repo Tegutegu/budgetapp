@@ -16,26 +16,26 @@ class UI {
         this.itemID = 0;
     }
     //submit budget method
-    submitBudgetForm(){
+    submitBudgetForm() {
         const value = this.budgetInput.value;
-        if(value==='' || value <0){
-            this.budgetFeedback.classList.add('showItem');
+        if(value==="" || value < 0){
+            this.budgetFeedback.classList.add("showItem");
             this.budgetFeedback.innerHTML = `<p>value connot be empty or negative</p>`;
             const self=this;
-            console.log(this);
+            //console.log(this);
 
-            setTimeout(function(){
-                self.budgetFeedback.classList.remove('showItem');
+            setTimeout(function() {
+                self.budgetFeedback.classList.remove("showItem");
             },4000);
         }
         else{
             this.budgetAmount.textContent = value;
-            this.budgetInput.value = '';
+            this.budgetInput.value = "";
             this.showBalance();
         }
     }
     //show balance
-    showBalance(){
+    showBalance() {
         const expense = this.totalExpense();
         const total = parseInt(this.budgetAmount.textContent) - expense;
         this.balanceAmount.textContent = total;
@@ -53,7 +53,7 @@ class UI {
         }
     }
     //submit expense form
-    submitExpenseForm(){
+    submitExpenseForm() {
         const expenseValue = this.expenseInput.value;
         const amountValue = this.amountInput.value;
         if(expenseValue === '' || amountValue === '' || amountValue < 0){
@@ -81,7 +81,7 @@ class UI {
         }
     }
 //add expense
-addExpense(expense){
+addExpense(expense) {
     const div = document.createElement('div');
     div.classList.add('expense');
     div.innerHTML = `<div class="expense-item d-flex justify-content-between align-items-baseline">
@@ -103,7 +103,7 @@ addExpense(expense){
 }
 
     //total expense
-    totalExpense(){
+    totalExpense() {
         let total = 0;
         if(this.itemList.length>0){
             total = this.itemList.reduce(function(acc,curr){
@@ -115,7 +115,7 @@ addExpense(expense){
         return total;
     }
     //edit expense
-    editExpense(element){
+    editExpense(element) {
     let id = parseInt(element.dataset.id);
     let parent = element.parentElement.parentElement.parentElement;
     //remove from dom
@@ -135,7 +135,7 @@ addExpense(expense){
     this.showBalance();
     }
     //delete expense
-    deleteExpense(element){
+    deleteExpense(element) {
         let id = parseInt(element.dataset.id);
         let parent = element.parentElement.parentElement.parentElement;
         //remove from dom
@@ -151,7 +151,7 @@ addExpense(expense){
 }
 
 
-function eventListenters(){
+function eventListenters() {
 const budgetForm = document.getElementById('budget-form');
 const expenseForm = document.getElementById('expense-form');
 const expenseList = document.getElementById('expense-list');
@@ -162,6 +162,7 @@ const ui = new UI()
 // budget form submit
 budgetForm.addEventListener('submit', function(event){
     event.preventDefault();
+    ui.submitBudgetForm();
 });
 
 // expense form submit
